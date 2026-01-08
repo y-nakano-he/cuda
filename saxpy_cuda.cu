@@ -1,8 +1,8 @@
-/*unified memory(cudaMallocManaged)でGPU実行*/
+/* unified memory(cudaMallocManaged)でGPU実行 */
 #include <iostream>
 #include <math.h>
+
 __global__ 
-// function to add the elements of two arrays
 void saxpy(int n, float a, float *x, float *y)
 {
  int i = ((blockIdx.x) * (blockDim.x)) + (threadIdx.x);
