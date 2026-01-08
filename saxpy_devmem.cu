@@ -1,18 +1,17 @@
-/*cudaMalloc
-  →cudaMemcpy(host->dev)
-  →cudaMemcpy(dev->host) で明示的にメモリ管理 */
+/* cudaMalloc
+   →cudaMemcpy(host->dev)
+   →cudaMemcpy(dev->host) で明示的にメモリ管理 */
   
 #include <stdio.h>
 #include <math.h>
 
 __global__ //宣言指定子によるカーネル定義
-
 void saxpy(int n, float a, float *x, float *y)
 {
-  /* GPUで並列計算をするために担当スレッドを一意にするインデックスを作成
+  /* GPU担当スレッドを一意にするインデックスを作成
     blockIdx: グリッド内のブロック番号
     blockDim: ブロック内のスレッド数
-    threadIdx: ブロック内のスレッド番号                 */
+    threadIdx: ブロック内のスレッド番号          */
 
   int i = ((blockIdx.x) * (blockDim.x)) + (threadIdx.x);
   if (i < n) y[i] = a*x[i] + y[i];
@@ -33,7 +32,8 @@ int main(void)
   cudaMalloc(&d_y, N*sizeof(float));
 
   /* hostメモリを初期化 */
-  for (int i = 0; i < N; i++) {
+  for (int i = 0; i < N; i++) 
+  {
     x[i] = 1.0f;
     y[i] = 2.0f;
   }
@@ -59,3 +59,4 @@ int main(void)
   free(x);
   free(y);
 }
+
