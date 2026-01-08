@@ -36,9 +36,9 @@ int main(void)
  // Check for errors (all values should be 4.0f)
  float maxError = 0.0f;
  for (int i = 0; i < N; i++)
-{
+ {
    maxError = fmax(maxError, fabs(y[i]-4.0f));
-} 
+ } 
  std::cout << "Max error: " << maxError << std::endl;
  
  // Free memory
