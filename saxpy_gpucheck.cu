@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 __global__
- void init(int n, float* x, float* y) {
+ void init(int n, float* x, float* y) 
+{
   int i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n) { x[i] = 1.0f; y[i] = 2.0f; }
 }
@@ -20,14 +21,16 @@ void saxpy(int n, float a, float *x, float *y)
 }
 
 __global__
-void check_err(int n, float* y, float ref, int* d_err_count) {
+void check_err(int n, float* y, float ref, int* d_err_count)
+{
   int i = blockIdx.x * blockDim.x + threadIdx.x;
   if (i < n)
-    if(y[i] != ref) {
+    if(y[i] != ref)
+    {
       //*d_err_count += 1;
       atomicAdd(d_err_count, 1);   
-   }
-}
+    }
+}  
 
 int main(void)
 {
@@ -63,3 +66,4 @@ int main(void)
   cudaFree(d_y);
   cudaFree(d_err_count);
 }
+
