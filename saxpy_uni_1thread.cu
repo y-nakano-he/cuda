@@ -22,7 +22,8 @@ int main(void)
  cudaMallocManaged(&y, N*sizeof(float));
  
  // initialize x and y arrays on the host
- for (int i = 0; i < N; i++) {
+ for (int i = 0; i < N; i++) 
+ {
    x[i] = 1.0f;
    y[i] = 2.0f;
  }
@@ -31,14 +32,14 @@ int main(void)
  saxpy<<<1, 1>>>(N, coef, x, y);
  
  // Wait for GPU to finish before accessing on host
-  cudaDeviceSynchronize();
-
+ cudaDeviceSynchronize();
+ 
  // Check for errors (all values should be 4.0f)
  float maxError = 0.0f;
  for (int i = 0; i < N; i++)
-{
+ {
    maxError = fmax(maxError, fabs(y[i]-4.0f));
-} 
+ } 
  std::cout << "Max error: " << maxError << std::endl;
  
  // Free memory
