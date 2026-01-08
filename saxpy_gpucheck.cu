@@ -1,4 +1,4 @@
-/* saxpy.cuから初期化、検算部分もGPUに変更 */
+/* saxpydevmem.cuから初期化、検算部分もGPUに変更 */
 #include <stdio.h>
 
 __global__
@@ -66,4 +66,5 @@ int main(void)
   cudaFree(d_y);
   cudaFree(d_err_count);
 }
+
 
